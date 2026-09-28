@@ -1,0 +1,8 @@
+{
+  "eighth-street-books": {
+    "name": "Eighth Street Books",
+    "attn": "Accounts Payable",
+    "address": ["1487 Eighth Street", "Troy, NY 12180"],
+    "email": "billing@eighthstreetbooks.example"
+  }
+}

@@ -1,0 +1,36 @@
+{
+  "publication": "The Polytechnic",
+
+  "paymentMethods": "Cash or check",
+  "payableTo": "Rensselaer Polytechnic Institute",
+
+  "remitTo": [
+    "ATTN: Nicole Hollister",
+    "Rensselaer Union",
+    "Rensselaer Polytechnic Institute",
+    "110 8th Street",
+    "Troy, NY 12180-3590"
+  ],
+
+  "fromAddress": [
+    "Rensselaer Union",
+    "110 8th Street",
+    "Troy, NY 12180-3590"
+  ],
+
+  "billingEmail": "ads@poly.rpi.edu",
+  "billingPhone": "",
+  "taxId": "",
+
+  "defaultNotes": "Ad artwork due five business days before each issue date. All rates subject to change. Contact ads@poly.rpi.edu with any questions about this invoice.",
+
+  "checkMemoTemplate": "Polytechnic Advertising ({number})",
+
+
+  "defaultTermsDays": 30,
+  "taxRate": 0,
+  "taxLabel": "NY sales tax",
+
+  "currency": "USD",
+  "invoiceNumberPrefix": ""
+}

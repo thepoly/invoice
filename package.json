@@ -1,0 +1,12 @@
+{
+  "name": "poly-invoices",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Invoice generator for The Polytechnic's advertising sales — matches the poly.rpi.edu design system.",
+  "bin": { "invoice": "./bin/invoice.js" },
+  "scripts": {
+    "render": "node bin/invoice.js render",
+    "list": "node bin/invoice.js list"
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "number": "1001",
+  "date": "2026-09-09",
+  "client": "eighth-street-books",
+  "termsDays": 30,
+  "dek": "",
+  "items": [
+    {
+      "description": "Full page, back cover",
+      "detail": "Vol. CXLIII No. 10 \u00b7 September 9, 2026",
+      "qty": 1,
+      "rate": 475
+    },
+    {
+      "description": "Half page, horizontal",
+      "detail": "Vol. CXLIII No. 11 \u00b7 September 23, 2026",
+      "qty": 2,
+      "rate": 260
+    },
+    {
+      "description": "Web leaderboard, poly.rpi.edu",
+      "detail": "Run of site \u00b7 30 days from September 9, 2026",
+      "qty": 1,
+      "rate": 180
+    }
+  ],
+  "notes": "Ad artwork due five business days before each issue date. All rates subject to change. Contact ads@poly.rpi.edu with any questions about this invoice.",
+  "paid": null
+}
