@@ -4,5 +4,8 @@
     "attn": "Accounts Payable",
     "address": ["1487 Eighth Street", "Troy, NY 12180"],
     "email": "billing@eighthstreetbooks.example"
+  },
+  "the-kebab-zone": {
+    "name": "The Kebab Zone"
   }
 }

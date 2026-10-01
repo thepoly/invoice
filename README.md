@@ -2,7 +2,7 @@
 
 Generates advertising invoices as PDFs, styled to match [poly.rpi.edu](https://poly.rpi.edu):
 the masthead logo, Raleway throughout, a Minion Pro headline, horizontal hairlines only,
-and red reserved for the logo and the kicker.
+and red reserved for the logo.
 
 Invoices are payable by cash or check. You email the PDF; they mail payment with the
 detached remittance slip; you record it here.
@@ -18,9 +18,11 @@ cd ~/Code/business
 
 Then run the commands below. Everything writes into `out/`.
 
-Requirements are Node and Google Chrome, both already on this machine. Nothing to
-install — no `npm install`, no dependencies. Chrome is used headlessly to print the
-PDF; if yours lives somewhere unusual, set `CHROME_PATH`.
+Requirements are Node and either Google Chrome or Xcode. Nothing to install — no
+`npm install`, no dependencies. Chrome is used headlessly to print the PDF; if yours
+lives somewhere unusual, set `CHROME_PATH`. With no Chrome-family browser installed,
+the PDF is printed through macOS's own WebKit instead, via a small Swift helper
+(`lib/html2pdf.swift`) that is compiled into `.build/` the first time it's needed.
 
 ## Before the first real invoice
 
@@ -30,7 +32,7 @@ PDF; if yours lives somewhere unusual, set `CHROME_PATH`.
   subject to change"
 - `paymentMethods` — `Cash or check`
 - `payableTo` — `Rensselaer Polytechnic Institute` (checks only; cash has no payee)
-- `checkMemoTemplate` — `Polytechnic Advertising ({number})`; `{number}` is replaced
+- `checkMemoTemplate` — `The Polytechnic ({number})`; `{number}` is replaced
   per invoice so a payment can be matched to what it settles
 - `remitTo` — the mail-to block, ATTN: Nicole Hollister
 - `fromAddress` — the shorter address in the "From" column
@@ -62,10 +64,12 @@ adjusting the design.
 ```
 config.json            your details — the from-address, who checks are payable to
 data/clients.json      advertisers, keyed by a short slug
+data/rates.json        the rate card — ad sizes and per-square-inch rates
 data/invoices/<n>.json one file per invoice; the number is the filename
 lib/template.js        the design (CSS + HTML)
 lib/build.js           totals, dates, formatting
-lib/pdf.js             headless Chrome
+lib/pdf.js             headless Chrome, or the WebKit fallback
+lib/html2pdf.swift     the WebKit fallback's helper
 out/                   generated PDFs (gitignored)
 assets/                logo + fonts, copied from the poly repo
 ```
@@ -78,20 +82,28 @@ assets/                logo + fonts, copied from the poly repo
   "date": "2026-09-09",
   "client": "eighth-street-books",
   "termsDays": 30,
-  "items": [
-    {
-      "description": "Full page, back cover",
-      "detail": "Vol. CXLIII No. 10 · September 9, 2026",
-      "qty": 1,
-      "rate": 475
-    }
-  ],
+  "ad": {
+    "size": "full",
+    "category": "local",
+    "run": "Vol. CXLIV Ed. IV · October 9, 2026"
+  },
   "notes": "Ad artwork due five business days before each issue date.",
   "paid": null
 }
 ```
 
-`detail` is the small gray line under each placement — use it for the issue and date.
+An invoice bills exactly one ad, priced off the rate card in `data/rates.json`:
+area in square inches × the category's rate per square inch. `size` is one of `full`,
+`half`, `quarter`, `eighth`, `sixteenth`, `variable`; `category` is one of `national`,
+`local`, `institute`, `clubs`. For an odd size, add `height` and `width` (inches) to
+override the card's dimensions. `run` is the issue and date.
+
+The bold heading is the category and size ("Local Business Half Page"). Under it sit
+the dimensions and the issue. The table row reads, left to right: the category's unit
+("Local Business square inch"), the unit price, the quantity in square inches, and
+the amount. Optional `lines` add further rows (`aspect`, `detail`, `amount`): a
+negative amount is a discount, `0` prints as "Included". Leave out `size` and the
+invoice is priced from `lines` alone. `name` overrides the heading.
 Set `"client"` to a key from `data/clients.json`, or inline the whole object.
 
 `notes` is the paragraph under the payment block. `new` seeds it from `defaultNotes`
@@ -124,7 +136,7 @@ keeps that honest, so don't ignore it.
 A **receipt** (an invoice with `paid` filled in) drops the slip.
 
 The page is budgeted to about 780px of its 944px content area. `render` counts pages
-and warns if it spills, usually from a long `notes` line or many placements.
+and warns if it spills, usually from a long `notes` line or many ad lines.
 
 To see where the space goes, temporarily add this to a rendered HTML file and open it:
 
@@ -140,8 +152,8 @@ The content area is 944px tall at 96dpi.
 The page carries horizontal rules only — no vertical ones, no boxes, no fills. The
 slip's tear line is the one dashed rule; the fill-in blanks are underlines. There is
 no page footer and no terms block.
-Hierarchy comes from weight and from three levels of black (`#000`, `#5f5f5f`, `#949494`).
-Red (`#D6001C`) appears exactly twice: the masthead and the kicker.
+Hierarchy comes from two weights; all text is black.
+Red (`#D6001C`) appears only in the masthead logo.
 
 Fonts and the logo are copied into `assets/` from `../poly/public/`. If the site's
 brand changes, re-copy them.

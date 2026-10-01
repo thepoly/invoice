@@ -22,9 +22,9 @@
   "billingPhone": "",
   "taxId": "",
 
-  "defaultNotes": "Ad artwork due five business days before each issue date. All rates subject to change. Contact ads@poly.rpi.edu with any questions about this invoice.",
+  "defaultNotes": "Ad artwork due five business days before each issue date. All rates subject to change. Contact ads@poly.rpi.edu with any questions.",
 
-  "checkMemoTemplate": "Polytechnic Advertising ({number})",
+  "checkMemoTemplate": "The Polytechnic ({number})",
 
 
   "defaultTermsDays": 30,

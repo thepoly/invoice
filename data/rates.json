@@ -1,0 +1,16 @@
+{
+  "sizes": {
+    "full": { "name": "Full Page", "height": 16, "width": 10 },
+    "half": { "name": "Half Page", "height": 8, "width": 10 },
+    "quarter": { "name": "Quarter Page", "height": 8, "width": 5 },
+    "eighth": { "name": "Eighth Page", "height": 4, "width": 5 },
+    "sixteenth": { "name": "Sixteenth Page", "height": 4, "width": 2.5 },
+    "variable": { "name": "Variable", "height": 3.5, "width": 2 }
+  },
+  "categories": {
+    "national": { "name": "National", "perSqIn": 5.0 },
+    "local": { "name": "Local Business", "perSqIn": 4.0 },
+    "institute": { "name": "Institute-Affiliated", "perSqIn": 3.5 },
+    "clubs": { "name": "Clubs", "perSqIn": 1.5 }
+  }
+}

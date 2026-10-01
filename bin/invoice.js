@@ -63,7 +63,7 @@ async function render(args) {
     console.log(`  ${path.relative(root, out)}  ${model.total}  →  ${model.clientName}`);
     if (pages > expected) {
       console.log(
-        `  ⚠ ${pages} pages, expected ${expected}. The page has spilled over — shorten the notes or a placement description.`
+        `  ⚠ ${pages} pages, expected ${expected}. The page has spilled over — shorten the notes or trim the ad's lines.`
       );
     }
     if (open) execFileSync("open", [out]);
@@ -96,7 +96,7 @@ function newInvoice(args) {
     number: String(number),
     date: today,
     client: clientKey,
-    items: [{ description: "Full page", detail: "Vol. — No. — · —", qty: 1, rate: 0 }],
+    ad: { size: "full", category: "local", run: "Vol. — Ed. — · —" },
     notes: config().defaultNotes ?? "",
     paid: null,
   };
@@ -104,7 +104,7 @@ function newInvoice(args) {
   const file = path.join(INV_DIR, `${number}.json`);
   fs.mkdirSync(INV_DIR, { recursive: true });
   fs.writeFileSync(file, JSON.stringify(stub, null, 2) + "\n");
-  console.log(`  ${path.relative(root, file)}   (fill in items, then: node bin/invoice.js render ${number})`);
+  console.log(`  ${path.relative(root, file)}   (fill in the ad, then: node bin/invoice.js render ${number})`);
 }
 
 // ── paid ──────────────────────────────────────────────────
